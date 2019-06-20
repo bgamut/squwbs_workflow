@@ -231,60 +231,73 @@ import { Context } from "../context";
 // }
 
 // export default DefaultFlatList;
+
+
+
 const DefaultFlatList =(props)=> {
   const [state, setState] = useContext(Context);
-  const makeRemoteRequest = () => {
-    if(state.data!=[]){
-      const { page, seed } = state;
-      const url = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=20`;
-      setState({ loading: true });
 
-      fetch(url)
-        .then(res => res.json())
-        .then(res => {
-          //console.log(res.results)
-          var copy =[...res.results]
-          var indexed =[]
-          for (var i =0; i<copy.length;i++){
-            indexed[i]={...copy[i],index:i}
-          }
-        
-          setState({
-            //data: page === 1 ? res.results : [...state.data, ...res.results],
-            data:[...state.data,...indexed],
-            error: res.error || null,
-            loading: false,
-            refreshing: false
-          });
-        })
-        .catch(error => {
-          setState({ error, loading: false });
-        });
-    }
-    
-      
-  };
   useEffect(()=>{
-    makeRemoteRequest();
+    
+    const makeRemoteRequest = (seed,page) => {
+        const url = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=20`;
+        //setState({ loading: true });
+    
+        fetch(url)
+          .then(res => res.json())
+          .then(res => {
+            //console.log(res.results)
+            var copy =[...res.results]
+            var indexed =[]
+            for (var i =0; i<copy.length;i++){
+              indexed[i]={...copy[i],index:i}
+            }
+          
+            setState({
+              //data: page === 1 ? res.results : [...state.data, ...res.results],
+              ...state,
+              data:[...state.data,...indexed],
+              error: false,
+              loading: false,
+              refreshing: false
+            });
+          })
+          .catch(error => {
+            setState({ ...state,error:true, loading: false });
+          });
+        console.log('some how this ran')    
+    };
+    // console.log('useEffect fired in defaultFlatlist')
+    const { seed, page } = state;
+    if(state.loading==true){
+      var data = makeRemoteRequest(seed,page)
+      setState({...state,data:data})
+      console.log('if part fired')
+    }
+    else{
+      console.log(state.data)
+      console.log('else part is fired')
+    }
     UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
-  })
+  },[])
   
   
 
   
 
   const handleRefresh = () => {
-    setState(
-      {
-        ...state,
-        page: 1,
-        seed: state.seed + 1,
-        refreshing: true
-      },
-      () => {
-        makeRemoteRequest();
-      }
-    );
+    // setState(
+    //   {
+    //     ...state,
+    //     page: 1,
+    //     seed: state.seed + 1,
+    //     refreshing: true
+    //   },
+    //   () => {
+    //     //makeRemoteRequest();
+    //   }
+    // );
+    console.log('refresh fired')
   };
 
   const handleLoadMore = () => {
@@ -293,7 +306,7 @@ const DefaultFlatList =(props)=> {
         page: state.page + 1
       },
       () => {
-        makeRemoteRequest();
+        //makeRemoteRequest();
       }
     );
   };
@@ -335,6 +348,7 @@ const DefaultFlatList =(props)=> {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
   }
   const dismiss= (itemIndex)=>{
+    console.log('dismiss fired')
     setState({
       ...state,
       refreshing:true
@@ -375,7 +389,7 @@ const DefaultFlatList =(props)=> {
               <FlatList 
                 data={state.data}
                 renderItem={({ item }) => (
-                  <SwipeableCard index={item.index} name_first={String(item.name.first)} name_last = {String(item.name.last)} picture={item.picture.thumbnail} email={item.email}  onDismiss={dismiss(item.index)}/>
+                  <SwipeableCard index={item.index} name_first={String(item.name.first)} name_last = {String(item.name.last)} picture={item.picture.thumbnail} email={item.email} onDismiss={dismiss(item.index)}/>
                 )}
             keyExtractor={item => item.index}
             //ItemSeparatorComponent={renderSeparator}

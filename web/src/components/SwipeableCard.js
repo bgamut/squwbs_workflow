@@ -77,6 +77,19 @@ import { Context } from "../context";
 
 const SwipeableCard = (props) => {
     const [state, setState] = useContext(Context);
+    const dismiss= (itemIndex)=>{
+      var filtered= []
+      for (var i = 0; i<state.data.length; i++){
+        if(itemIndex!=i){
+          filtered.push({...state.data[i],index:i})
+        }
+      }
+      setState({
+        ...state,
+        data:[...filtered]
+      })
+      console.log(state.data)
+    }
     //const [userInput,setUserInput,Refs] = useState("")
     const translateX = new Animated.Value(0);
     const _panResponder = PanResponder.create({
@@ -91,7 +104,12 @@ const SwipeableCard = (props) => {
           Animated.timing(translateX, {
             toValue: dx > 0 ? screenWidth : -screenWidth,
             duration: 200
-          }).start(props.onDismiss);
+          // }).start(props.onDismiss);
+        }).start(
+          
+          dismiss(props.index)
+          
+          );
           //console.log("yo this element's index was "+props.name_first)
           //setState()
         } else {

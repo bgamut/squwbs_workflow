@@ -1,4 +1,5 @@
-import React,{Component,Context,useContext} from 'react';
+//import React,{Component,Context,useContext,useState,useEffect} from 'react';
+import React,{Component,useContext,useState,useEffect} from 'react';
 //import logo from './logo.svg';
 //import './App.css';
 import Header from './components/Header'
@@ -10,24 +11,65 @@ import ScrollableHeader from './components/ScrollableHeader'
  
 import DefaultFlatList from './components/DefaultFlatList'
 //import {FlatList} from 'react'
-import {ContextController} from './context'
+import {ContextController,Context} from './context'
+//import { Context } from "./context";
 import {View,Text,ScrollView,Dimensions,Platform,SafeAreaView,StyleSheet,KeyboardAvoidingView} from 'react-native'
+
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
   android: 'Double tap R on your keyboard to reload,\n' + 'Shake or press menu button for dev menu',
 });
 
-class App extends Component {
-  componentDidMount() {
-   // window.scrollTo(0, 0)
-  }
-  click(string){
-    alert(string)
-  }
-  render(){
+// class App extends Component {
+
+const App = (props)=>{
+  //const [state, setState] = useContext(Context);
+  // const makeRemoteRequest = () => {
+  //     if(state.data!=[]){
+  //       const { page, seed } = state;
+  //       const url = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=20`;
+  //       setState({ loading: true });
+
+  //       fetch(url)
+  //         .then(res => res.json())
+  //         .then(res => {
+  //           //console.log(res.results)
+  //           var copy =[...res.results]
+  //           var indexed =[]
+  //           for (var i =0; i<copy.length;i++){
+  //             indexed[i]={...copy[i],index:i}
+  //           }
+          
+  //           setState({
+  //             //data: page === 1 ? res.results : [...state.data, ...res.results],
+  //             data:[...state.data,...indexed],
+  //             error: res.error || null,
+  //             loading: false,
+  //             refreshing: false
+  //           });
+  //         })
+  //         .catch(error => {
+  //           setState({ error, loading: false });
+  //         });
+  //       console.log('some how this ran')
+  //     }   
+  //   };
+  useEffect(()=>{
+    // console.log('somehow this ran in the App useEffect method!!')
+  })
+  
+  // componentDidMount() {
+  //  // window.scrollTo(0, 0)
+    
+  // }
+  // click(string){
+  //   alert(string)
+  // }
+  // render(){
     return(
      
       <ContextController>
+      
         <SafeAreaView>
           <View style={{backgroundColor:'transparent',flexDirection:'column',margin:0,padding:0}}>
             <View>
@@ -108,9 +150,10 @@ class App extends Component {
           </View>
           
         </SafeAreaView>
+      
       </ContextController>
     )
-  }
+  // }
 }
 
 const appStyle = {

@@ -50,7 +50,7 @@ const[userInput,setUserInput,Refs] = useState("")
     //setUserInput(e.target.value)
     //console.log()
     
-    //setState({...state,userInput:e.target.value})
+    setState({...state,userInput:e.target.value})
     //console.log(e.nativeEvent.inputType)
     
         if(e.nativeEvent.inputType=='insertLineBreak'){

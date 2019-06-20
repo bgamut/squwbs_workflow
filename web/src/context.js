@@ -10,7 +10,7 @@ export function ContextController({ children }) {
     random: "",
     yscroll: new Animated.Value(0),
     headerHeight:22,
-    loading: false,
+    loading: true,
     data: [],
     page: 1,
     seed: 1,
