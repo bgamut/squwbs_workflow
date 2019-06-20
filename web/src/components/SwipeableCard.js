@@ -160,7 +160,7 @@ const SwipeableCard = (props) => {
       
             <View>
                 <Animated.View
-                    style={{transform: [{translateX: translateX}], height: 75}} {..._panResponder.panHandlers}
+                    style={{transform: [{translateX: translateX}], height:55}} {..._panResponder.panHandlers}
                 >
                     {/* <Text>
                         {props.title}
