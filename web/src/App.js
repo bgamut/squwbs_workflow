@@ -1,5 +1,6 @@
 //import React,{Component,Context,useContext,useState,useEffect} from 'react';
 import React,{Component,useContext,useState,useEffect} from 'react';
+import {Animated,PanResponder} from 'react-native'
 //import logo from './logo.svg';
 //import './App.css';
 import Header from './components/Header'
@@ -15,12 +16,26 @@ import SwipeableList from './components/SwipeableList'
 import {ContextController,Context} from './context'
 //import { Context } from "./context";
 import {View,Text,ScrollView,Dimensions,Platform,SafeAreaView,StyleSheet,KeyboardAvoidingView} from 'react-native'
-
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
   android: 'Double tap R on your keyboard to reload,\n' + 'Shake or press menu button for dev menu',
 });
+const translateY = new Animated.Value(0);
 
+var star=0
+const _panResponder = PanResponder.create({
+  onMoveShouldSetResponderCapture: () => true,
+  onMoveShouldSetPanResponderCapture: () => true,
+  onPanResponderMove: (e,gestureState)=>{
+    translateY.setValue(gestureState.dy) 
+    console.log(star+translateY._value)  
+  } ,
+
+  onPanResponderRelease: (e, {vy, dy}) => {
+    star+=dy
+    console.log(star)
+  }
+});
 // class App extends Component {
 
 const App = (props)=>{
@@ -67,6 +82,10 @@ const App = (props)=>{
   //   alert(string)
   // }
   // render(){
+    const logger=(e)=>{
+      //console.log(e.nativeEvent.contentOffset.y)
+      
+    }
     return(
      
       <ContextController>
@@ -74,7 +93,12 @@ const App = (props)=>{
         <SafeAreaView>
           <View style={{backgroundColor:'transparent',flexDirection:'column',margin:0,padding:0}}>
             <View>
-              <ScrollView style={{backgroundColor:'transparent',height:Dimensions.get('window').height*13/15-50}}>
+              <ScrollView 
+                style={{backgroundColor:'transparent',height:Dimensions.get('window').height*13/15-50}}
+                onScroll={logger}
+                scrollEventThrottle={1}
+                {..._panResponder.panHandlers}
+              >
                 <View style={{backgroundColor:'transparent',flex:1,flexDirection:'column',margin:5,paddingRight:2,paddingLeft:2}}>
                   {/* <View style={{paddingTop:2}}>
                     <AddPost style={{padding:1,margin:1,zIndex:0}}/> 

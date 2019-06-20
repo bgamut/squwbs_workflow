@@ -362,6 +362,7 @@ const DefaultFlatList =(props)=> {
   //   }
   
   // else{
+    
       return (
         <View style={{ 
           borderTopWidth: 0, 
@@ -377,7 +378,8 @@ const DefaultFlatList =(props)=> {
             //ItemSeparatorComponent={renderSeparator}
             //ListHeaderComponent={renderHeader}
             //ListFooterComponent={renderFooter}
-            scrollEventThrottle={16}
+            
+            scrollEventThrottle={1}
             //onRefresh={handleRefresh}
             //refreshing={state.refreshing}
             //onEndReached={handleLoadMore}

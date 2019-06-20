@@ -131,6 +131,7 @@ const SwipeableCard = (props) => {
     //const [userInput,setUserInput,Refs] = useState("")
     const dragPos = new Animated.ValueXY({x:0,y:styles.height});
     const translateX = new Animated.Value(0);
+    const translateY=new Animated.Value(0)
     const _panResponder = PanResponder.create({
       onMoveShouldSetResponderCapture: () => true,
       onMoveShouldSetPanResponderCapture: () => true,
@@ -138,9 +139,11 @@ const SwipeableCard = (props) => {
         //translateX.setValue(gestureState.dx)
         //Animated.event([null, {dx: translateX}])
         dragPos.setValue({x:gestureState.dx,y:styles.height})
+        //translateY.setValue(state.dy._value+gestureState.dy)
         //console.log(translateX._value)
         //console.log(position.x._value +" : "+position.y._value)
-        
+        //setState({...state,dy:translateY})
+        //console.log(state.dy)
       } ,
       // onPanResponderRelease: (e, {vx, dx}) => {
       //   //const [state, setState] = useContext(Context);

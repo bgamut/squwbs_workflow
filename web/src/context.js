@@ -19,7 +19,8 @@ export function ContextController({ children }) {
     closedIndices:[],
     index:0,
     dataManipulated:false,
-    filteredData:[]
+    filteredData:[],
+    dy: new Animated.Value(0)
   };
 
   const [state, setState] = useState(intialState);
