@@ -9,7 +9,8 @@ import AddPost from './components/AddPost'
 import Swiper from './components/Swiper'
 import ScrollableHeader from './components/ScrollableHeader'
  
-import DefaultFlatList from './components/DefaultFlatList'
+import SwipeableList from './components/SwipeableList'
+//import SwipeableList from './components/SwipeableList'
 //import {FlatList} from 'react'
 import {ContextController,Context} from './context'
 //import { Context } from "./context";
@@ -110,7 +111,7 @@ const App = (props)=>{
                 
                 </View>
                 <View>
-                  <DefaultFlatList/>
+                  <SwipeableList/>
                 </View>
               </ScrollView> 
               
