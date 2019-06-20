@@ -257,6 +257,7 @@ const DefaultFlatList =(props)=> {
               //data: page === 1 ? res.results : [...state.data, ...res.results],
               ...state,
               data:[...state.data,...indexed],
+              filteredData:[...state.data,...indexed],
               error: false,
               loading: false,
               refreshing: false
@@ -347,27 +348,7 @@ const DefaultFlatList =(props)=> {
     return state.closedIndices.indexOf(index) === -1
     LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
   }
-  const dismiss= (itemIndex)=>{
-    // console.log('dismiss fired')
-    setState({
-      ...state,
-      refreshing:true
-    })
-    var filtered= []
-    for (var i = 0; i<state.data.length; i++){
-      if(itemIndex!=i){
-        filtered.push({...state.data[i],index:i})
-      }
-    }
-    setState({
-      ...state,
-      data:[...filtered]
-    })
-    setState({
-      ...state,
-      refreshing:false
-    })
-  }
+  
   
     // var filtered=[]
     // for (var i = 0; i<state.data.length; i++){

@@ -18,6 +18,8 @@ export function ContextController({ children }) {
     refreshing: false,
     closedIndices:[],
     index:0,
+    dataManipulated:false,
+    filteredData:[]
   };
 
   const [state, setState] = useState(intialState);

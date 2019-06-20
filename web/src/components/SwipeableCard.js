@@ -77,18 +77,50 @@ import { Context } from "../context";
 
 const SwipeableCard = (props) => {
     const [state, setState] = useContext(Context);
+    // const dismiss= (itemIndex)=>{
+    //   var filtered= []
+    //   var appliedIndex=0
+    //   for (var i = 0; i<state.data.length; i++){
+    //     if(itemIndex!=i){
+    //       filtered.push({...state.data[i],index:appliedIndex})
+    //       appliedIndex++
+    //     }
+    //   }
+
+    //   console.log(filtered)
+    //   setState({
+    //     ...state,
+    //     data:[...filtered]
+    //   })
+      
+    // }
     const dismiss= (itemIndex)=>{
-      var filtered= []
-      for (var i = 0; i<state.data.length; i++){
-        if(itemIndex!=i){
-          filtered.push({...state.data[i],index:i})
-        }
-      }
-      setState({
-        ...state,
-        data:[...filtered]
-      })
-      console.log(state.data)
+      // console.log('dismiss fired')
+      // setState({
+      //   ...state,
+      //   refreshing:true
+      // })
+      
+      
+        // var filtered= []
+        // for (var i = 0; i<state.data.length; i++){
+        //   if(itemIndex!=i){
+        //     filtered.push({...state.data[i],index:i})
+        //   }
+        // }
+        console.log(state.filteredData)
+        var filtered =state.filteredData.filter(item => item.index !== itemIndex);
+        // for (var i=0;i<filtered.length;i++){
+        //   filtered[i].index=i
+        // }
+        // console.log(filtered)
+        setState({
+          ...state,
+          filteredData:[...filtered],
+          dataManipulated:true,
+          refreshing:false
+        })
+        
     }
     //const [userInput,setUserInput,Refs] = useState("")
     const translateX = new Animated.Value(0);
