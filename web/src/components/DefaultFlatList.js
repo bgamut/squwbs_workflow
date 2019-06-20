@@ -348,7 +348,7 @@ const DefaultFlatList =(props)=> {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
   }
   const dismiss= (itemIndex)=>{
-    console.log('dismiss fired')
+    // console.log('dismiss fired')
     setState({
       ...state,
       refreshing:true
@@ -389,7 +389,8 @@ const DefaultFlatList =(props)=> {
               <FlatList 
                 data={state.data}
                 renderItem={({ item }) => (
-                  <SwipeableCard index={item.index} name_first={String(item.name.first)} name_last = {String(item.name.last)} picture={item.picture.thumbnail} email={item.email} onDismiss={dismiss(item.index)}/>
+                  // <SwipeableCard index={item.index} name_first={String(item.name.first)} name_last = {String(item.name.last)} picture={item.picture.thumbnail} email={item.email} onDismiss={dismiss(item.index)}/>
+                  <SwipeableCard index={item.index} name_first={String(item.name.first)} name_last = {String(item.name.last)} picture={item.picture.thumbnail} email={item.email}/>
                 )}
             keyExtractor={item => item.index}
             //ItemSeparatorComponent={renderSeparator}
